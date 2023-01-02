@@ -5,7 +5,7 @@ function execSQLQuery(sqlQry, res) {
     host: 'localhost',
     port: '3306',
     user: 'admin',
-    password: '123!@#',
+    password: '******',
     database: 'node'
 });
 
