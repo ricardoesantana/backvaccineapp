@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
     res.end();
 })
 
+// APIs CLIENTES
 app.get('/clientes', (req, res) =>{
     res.setHeader("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
@@ -45,8 +46,30 @@ app.delete('/clientes/:id', (req, res) =>{
     return connect.execSQLQuery("delete from cliente where id="+ req.params.id, res);
 })
 
+// APIs USUÁRIOS
+
+app.get('/usuarios', (req, res) =>{
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    return connect.execSQLQuery('select * from usuario', res);
+})
+
+app.get('/usuarios/:email/:senha', (req, res) =>{
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    return connect.execSQLQuery("select * from usuario where email ='"+ req.params.email + "' and senha = '"+req.params.senha + "'", res);
+})
+
+app.post('/usuarios/', (req, res) =>{
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    return connect.execSQLQuery("insert into usuario (email, senha) values('"+req.body.email+"','"+req.body.senha+"')", res);
+})
+
 // Port Number
 const PORT = process.env.PORT ||5000;
 
 // Server Setup
 app.listen(PORT, console.log('Server started on port ${PORT}'));
+
+//select * from usuario where email = 'ricardo' and senha = '123';
